@@ -404,26 +404,45 @@ const add = (a: number, b: number) => a + b;
 
 ---
 
-## 📦 Dependencies
+## 📦 Dependencies & Testing
 
-- Use `pnpm` for package management.
+- Use `bun` for package management and testing.
 - Avoid suggesting large dependencies unless necessary.
 - When installing libraries, do not rely on your own training data.
 - Your training data has a cut-off date. You're probably not aware of all of the latest developments in the JavaScript and TypeScript world.
 - This means that instead of picking a version manually (via updating the `package.json` file), you should use a script to install the latest version of a library.
 
 ```bash
-# pnpm
-pnpm add -D @typescript-eslint/eslint-plugin
-
-# yarn
-yarn add -D @typescript-eslint/eslint-plugin
-
-# npm
-npm install --save-dev @typescript-eslint/eslint-plugin
+# bun
+bun add -D @typescript-eslint/eslint-plugin
 ```
 
 - This will ensure you're always using the latest version.
+
+### Testing
+
+- Use **Bun Test** for unit and integration tests.
+- Use **Playwright** for end-to-end tests.
+- Follow the pattern of placing test files alongside source files with `.test.tsx` or `.test.ts` extensions.
+- Use descriptive test names that explain the behavior being tested.
+- Prefer Testing Library utilities for React component testing.
+- Mock functions should use Bun's built-in `mock()` function instead of external mocking libraries.
+
+### Testing Guidelines
+
+```typescript
+import { describe, expect, it, mock } from "bun:test";
+import { render, screen } from "@testing-library/react";
+
+describe("Component", () => {
+  it("should render correctly", () => {
+    const mockFn = mock();
+    render(<Component onClick={mockFn} />);
+    
+    expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+});
+```
 
 ### Naming Conventions
 - Use kebab-case for file names (e.g., `my-component.ts`)
@@ -441,10 +460,29 @@ type RecordOfArrays<TItem> = Record<string, TItem[]>;
 
 ## 📁 Project Structure
 
-All code should be organized within the `src/` folder with the following structure:
+This is a monorepo with the following top-level structure:
 
 ```
-src/
+.
+├── apps/                   # Applications
+│   ├── web/               # Main Next.js web application
+│   └── docs/              # Documentation application
+├── packages/              # Shared packages
+│   ├── ui/                # Shared UI components library
+│   └── typescript-config/ # Shared TypeScript configurations
+├── .github/               # GitHub workflows and configurations
+├── turbo.json            # Turborepo configuration
+├── biome.json            # Biome linting configuration
+├── bunfig.toml           # Bun configuration
+└── package.json          # Root package.json
+```
+
+### Web App Structure
+
+All code for the main web application should be organized within the `apps/web/src/` folder with the following structure:
+
+```
+apps/web/src/
 ├── app/                    # Next.js App Router (pages, layouts, route handlers)
 │   ├── favicon.ico         # App favicon
 │   ├── layout.tsx          # Root layout component

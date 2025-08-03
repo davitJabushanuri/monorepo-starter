@@ -1,23 +1,24 @@
-# 🚀 Frontend Starter Template
+# 🚀 Monorepo Starter Template
 
-A production-ready frontend template using modern tooling:
+A production-ready monorepo template using modern tooling:
 
-- 🧑‍💻 Framework: Next.js / Vite (adjust as needed)
-- 🧪 Testing: Vitest (unit) + Playwright (e2e)
+- 🏗️ Monorepo: Turborepo
+- 🧑‍💻 Framework: Next.js
+- 🧪 Testing: Bun Test (unit) + Playwright (e2e)
 - 🧹 Linting: Biome
 - 🧾 Typing: TypeScript
 - 🚦 CI/CD: GitHub Actions
 - 🧩 Commit Style: Conventional Commits (w/ linting)
 - 🚀 Release: Semantic Release (auto versioning + changelog)
-- 📦 Package Manager: pnpm
+- 📦 Package Manager: Bun
 
 ---
 
 ## 🛠️ Getting Started
 
 ```bash
-pnpm install
-pnpm dev
+bun install
+bun dev
 ```
 
 ---
@@ -26,31 +27,33 @@ pnpm dev
 
 | Command | Description |
 |--------|-------------|
-| `pnpm dev` | Run the dev server |
-| `pnpm build` | Build the app |
-| `pnpm lint` | Run Biome (lint + format) |
-| `pnpm typecheck` | Run TypeScript type checking |
-| `pnpm test` | Run unit tests with Vitest |
-| `pnpm test:e2e` | Run E2E tests with Playwright |
-| `pnpm release` | Trigger Semantic Release (usually via CI) |
+| `bun dev` | Run the dev server |
+| `bun build` | Build all apps |
+| `bun lint` | Run Biome (lint + format) |
+| `bun typecheck` | Run TypeScript type checking |
+| `bun test` | Run unit tests with Bun Test |
+| `bun test:e2e` | Run E2E tests with Playwright |
 
 ---
 
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
-pnpm test
+bun test
 ```
 
 ### E2E Tests
+
 ```bash
-pnpm test:e2e
+bun test:e2e
 ```
 
 To install Playwright browsers for CI:
+
 ```bash
-pnpm test:e2e:install:ci
+bun test:e2e:install:ci
 ```
 
 ---
@@ -73,9 +76,10 @@ git commit -m "feat(auth): add login flow (#123)"
 
 We use [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) for automated versioning and changelogs.
 
-### To manually trigger a release (locally or CI):
+### To manually trigger a release
+
 ```bash
-pnpm release
+bun release
 ```
 
 > Releasing is automatically triggered on `main` via GitHub Actions.
@@ -86,28 +90,29 @@ pnpm release
 
 - ✅ Linting (Biome)
 - ✅ TypeScript type checking
-- ✅ Vitest tests
+- ✅ Bun Test (unit tests)
 - ✅ Playwright tests
 - ✅ Semantic release (on push to `main`)
-- ✅ Deploy (optional)
 
 Check `.github/workflows/` for full config.
 
 ---
 
-## 🧩 Project Structure (example)
+## 🧩 Project Structure
 
-```
+```text
 .
 ├── apps/
-│   └── dashboard/           # Main app
+│   ├── web/                 # Main Next.js app
+│   └── docs/                # Documentation app
 ├── packages/
-│   └── ui/                  # Shared component lib
+│   ├── ui/                  # Shared component library
+│   └── typescript-config/   # Shared TypeScript configs
 ├── .github/
 │   └── workflows/           # CI config
-├── .biome.json              # Biome config
-├── vitest.config.ts         # Vitest config
-├── playwright.config.ts     # Playwright config
+├── turbo.json               # Turborepo config
+├── biome.json               # Biome config
+├── bunfig.toml              # Bun config
 └── package.json
 ```
 
@@ -130,6 +135,7 @@ Maintained by `semantic-release` in [`CHANGELOG.md`](./CHANGELOG.md)
 ## 📦 Versioning
 
 Semantic release automatically:
+
 - Bumps version based on commit history
 - Updates `CHANGELOG.md`
 - Creates GitHub release

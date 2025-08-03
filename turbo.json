@@ -1,0 +1,62 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+      "start": {
+      "dependsOn": ["^start"],
+      "outputs": [".next/**", "dist/**"]
+    },
+  
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    },
+
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    
+    "test:watch": {
+      "dependsOn": ["^test:watch"],
+      "cache": false,
+      "persistent": true
+    },
+
+    "test:coverage": {
+      "dependsOn": ["^test:coverage"]
+    },
+
+    "test:e2e": {
+      "dependsOn": ["^test:e2e"]
+    },
+    "test:e2e:dev": {
+      "dependsOn": ["^test:e2e:dev"]
+    },
+    "test:e2e:debug": {
+      "dependsOn": ["^test:e2e:debug"],
+      "cache": false,
+      "persistent": true
+    },
+
+    "test:e2e:ci": {
+      "dependsOn": ["^test:e2e:ci"]
+    },
+
+    "test:e2e:install": {
+      "dependsOn": ["^test:e2e:install"]
+    },
+
+    "test:e2e:install:ci": {
+      "dependsOn": ["^test:e2e:install:ci"]
+    },
+
+    "dev": {
+      "persistent": true,
+      "cache": false
+    }
+  }
+}
