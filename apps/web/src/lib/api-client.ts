@@ -78,7 +78,7 @@ async function fetchApi<T>(
       ...headers,
       ...(cookieHeader ? { Cookie: cookieHeader } : {}),
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: body ? JSON.stringify(body) : null,
     credentials: "include",
     cache,
     next,
