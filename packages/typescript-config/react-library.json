@@ -3,9 +3,6 @@
   "extends": "./base.json",
   "compilerOptions": {
     "lib": ["dom", "ES2023"],
-    "jsx": "react-jsx",
-    "target": "ES2022",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true
+    "jsx": "react-jsx"
   }
 }

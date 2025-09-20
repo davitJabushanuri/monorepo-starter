@@ -20,7 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
-    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true
   }
 }
