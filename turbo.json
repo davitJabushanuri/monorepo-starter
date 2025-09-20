@@ -7,29 +7,34 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-      "start": {
+    "start": {
       "dependsOn": ["^start"],
       "outputs": [".next/**", "dist/**"]
     },
-  
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "lint": {
+      "cache": true
+    },
+    "lint:fix": {
+      "cache": false
+    },
     "typecheck": {
       "dependsOn": ["^typecheck"]
     },
-
     "test": {
       "dependsOn": ["^test"]
     },
-
     "test:watch": {
       "dependsOn": ["^test:watch"],
       "cache": false,
       "persistent": true
     },
-
     "test:coverage": {
       "dependsOn": ["^test:coverage"]
     },
-
     "test:e2e": {
       "dependsOn": ["^test:e2e"]
     },
@@ -41,22 +46,34 @@
       "cache": false,
       "persistent": true
     },
-
     "test:e2e:ci": {
       "dependsOn": ["^test:e2e:ci"]
     },
-
     "test:e2e:install": {
       "dependsOn": ["^test:e2e:install"]
     },
-
     "test:e2e:install:ci": {
       "dependsOn": ["^test:e2e:install:ci"]
     },
-
-    "dev": {
+    "db:up": {
+      "cache": false
+    },
+    "db:down": {
+      "cache": false
+    },
+    "db:generate": {
+      "dependsOn": ["^db:generate"],
+      "outputs": ["drizzle/**"]
+    },
+    "db:migrate": {
+      "dependsOn": ["^db:migrate"]
+    },
+    "db:studio": {
       "persistent": true,
       "cache": false
+    },
+    "db:seed": {
+      "dependsOn": ["^db:seed"]
     }
   }
 }
