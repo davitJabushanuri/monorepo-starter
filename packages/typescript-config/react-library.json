@@ -2,6 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./base.json",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "lib": ["dom", "ES2023"],
+    "jsx": "react-jsx",
+    "target": "ES2022",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true
   }
 }
