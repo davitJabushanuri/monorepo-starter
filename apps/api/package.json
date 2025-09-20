@@ -1,0 +1,16 @@
+{
+  "name": "api",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/config": "*",
+    "@repo/db": "*",
+    "better-auth": "^1.3.13",
+    "hono": "^4.9.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
