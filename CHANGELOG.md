@@ -1,3 +1,7 @@
+## 1.2.0 (2025-09-20)
+
+* feat: update TypeScript configurations and improve project structure ([32aad0b](https://github.com/davitJabushanuri/monorepo-starter/commit/32aad0b))
+
 ## 1.1.0 (2025-09-20)
 
 * feat: add configuration files with environment variable validation ([e7f8aa3](https://github.com/davitJabushanuri/monorepo-starter/commit/e7f8aa3))
