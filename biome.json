@@ -3,13 +3,15 @@
 
   "files": {
     "ignoreUnknown": false,
-
     "includes": [
-      "src/**/*",
-      "playwright.config.ts",
-      "vitest.config.ts",
-      "biome.json",
-      "package.json"
+      "**",
+      "!**/dist",
+      "!**/node_modules",
+      "!**/build",
+      "!**/coverage",
+      "!**/.turbo",
+      "!**/.next",
+      "!**/routeTree.gen.ts"
     ]
   },
   "formatter": {
@@ -36,7 +38,9 @@
       "suspicious": {
         "recommended": true,
         "noDebugger": "error",
-        "noConsole": "warn"
+        "noConsole": "warn",
+        "noArrayIndexKey": "warn",
+        "noUnknownAtRules": "warn"
       },
       "style": {
         "recommended": true,
@@ -61,7 +65,8 @@
           },
           "level": "error",
           "fix": "none"
-        }
+        },
+        "useUniqueElementIds": "off"
       },
       "nursery": {
         "recommended": true,

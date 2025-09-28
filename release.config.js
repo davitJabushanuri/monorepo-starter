@@ -1,4 +1,5 @@
 /** @type {import('semantic-release').Config} */
+/** biome-ignore-all lint/suspicious/noTemplateCurlyInString: <necessary> */
 module.exports = {
   branches: ["main"], // Adjust if you're releasing from a different branch
   plugins: [
