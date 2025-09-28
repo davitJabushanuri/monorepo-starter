@@ -1,6 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
 
-
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const TEST_USER_EMAIL = process.env.TEST_USER_EMAIL;
 const TEST_USER_PASSWORD = process.env.TEST_USER_PASSWORD;

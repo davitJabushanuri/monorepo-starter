@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ErrorBoundaryProvider } from "@/providers/error-boundary-provider";
 import { afterEach, expect } from "bun:test";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as matchers from "@testing-library/jest-dom/matchers";
-import { type RenderOptions, cleanup, render } from "@testing-library/react";
+import { cleanup, type RenderOptions, render } from "@testing-library/react";
+import { ErrorBoundaryProvider } from "@/providers/error-boundary-provider";
 
 expect.extend(matchers);
 
