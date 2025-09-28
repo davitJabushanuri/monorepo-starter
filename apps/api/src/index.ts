@@ -1,19 +1,17 @@
-import { WEB_URL, MOBILE_URL, PORT } from '@repo/config';
-import { Hono } from 'hono'
-import { auth } from '@/features/auth';
+import { MOBILE_URL, PORT, WEB_URL } from "@repo/config";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { cors } from 'hono/cors';
-
+import { auth } from "@/features/auth";
 
 export type Variables = {
   user: typeof auth.$Infer.Session.user | null;
   session: typeof auth.$Infer.Session.session | null;
 };
 
-
 const app = new Hono<{
-  Variables: Variables
-}>().basePath('/api')
+  Variables: Variables;
+}>().basePath("/api");
 app.use(logger());
 
 app.use("*", async (c, next) => {
@@ -44,12 +42,11 @@ app.on(["POST", "GET"], "/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 
-
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
 export default {
   fetch: app.fetch,
   port: PORT,
-}
+};
