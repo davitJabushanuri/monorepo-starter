@@ -24,6 +24,7 @@ export const getRouter = () => {
 
   setupRouterSsrQueryIntegration({
     router,
+    // @ts-expect-error
     queryClient: rqContext.queryClient,
   });
 

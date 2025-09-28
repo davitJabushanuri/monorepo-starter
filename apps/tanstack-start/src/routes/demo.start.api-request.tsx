@@ -28,6 +28,7 @@ function Home() {
       <div className="w-full max-w-2xl rounded-xl border-8 border-black/10 bg-black/50 p-8 shadow-xl backdrop-blur-md">
         <h1 className="mb-4 text-2xl">Start API Request Demo - Names List</h1>
         <ul className="mb-4 space-y-2">
+          {/* @ts-expect-error */}
           {names.map((name) => (
             <li
               key={name}

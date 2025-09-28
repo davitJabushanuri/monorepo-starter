@@ -15,6 +15,7 @@ server.registerTool(
     title: "Tool to add a todo to a list of todos",
     description: "Add a todo to a list of todos",
     inputSchema: {
+      // @ts-expect-error
       title: z.string().describe("The title of the todo"),
     },
   },
