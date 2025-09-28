@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,14 +16,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BASE_URL } from "@/config";
-import { authClient } from "../lib/auth-client";
+import { signIn } from "../lib/auth-client";
 
 // Form validation schema
 const signInSchema = z.object({
   email: z
     .string()
     .min(1, "Email is required")
-    .email({ message: "Please enter a valid email address" }),
+    .email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -47,15 +48,16 @@ export const SignInForm = () => {
 
     try {
       // Sign in with email/password
-      const result = await authClient.signIn.email({
+      const result = await signIn.email({
         email: data.email,
         password: data.password,
+        callbackURL: `${BASE_URL}/`,
       });
 
       if (result.error) {
         setServerError(result.error.message || "Sign in failed");
-      } else {
       }
+      // Success - the auth client should handle navigation
     } catch (_error) {
       setServerError("An unexpected error occurred. Please try again.");
     } finally {
@@ -68,11 +70,11 @@ export const SignInForm = () => {
     setServerError(null);
 
     try {
-      await authClient.signIn.social({
+      await signIn.social({
         provider: "google",
         callbackURL: BASE_URL,
       });
-    } catch (_error) {
+    } catch {
       setServerError("Google sign in failed. Please try again.");
     } finally {
       setIsGoogleLoading(false);
@@ -209,6 +211,17 @@ export const SignInForm = () => {
             </>
           )}
         </Button>
+
+        {/* Sign Up Link */}
+        <div className="text-center text-sm">
+          Don't have an account?{" "}
+          <Link
+            to="/auth/signup"
+            className="font-medium text-primary hover:underline"
+          >
+            Sign up
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );

@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +15,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "../lib/auth-client";
+import { BASE_URL } from "@/config";
+import { signUp } from "../lib/auth-client";
 
 // Form validation schema
 const signUpSchema = z.object({
@@ -22,7 +24,7 @@ const signUpSchema = z.object({
   email: z
     .string()
     .min(1, "Email is required")
-    .email({ message: "Please enter a valid email address" }),
+    .email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -47,10 +49,11 @@ export const SignUpForm = () => {
 
     try {
       // Sign up with email/password
-      const result = await authClient.signUp.email({
+      const result = await signUp.email({
         email: data.email,
         password: data.password,
         name: data.name,
+        callbackURL: `${BASE_URL}/`,
       });
 
       if (result.error) {
@@ -232,6 +235,17 @@ export const SignUpForm = () => {
             </>
           )}
         </Button>
+
+        {/* Sign In Link */}
+        <div className="text-center text-sm">
+          Already have an account?{" "}
+          <Link
+            to="/auth/signin"
+            className="font-medium text-primary hover:underline"
+          >
+            Sign in
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );
