@@ -1,16 +1,16 @@
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI } from "better-auth/plugins";
-import { db } from "@repo/db";
-import * as schema from "@repo/db/schema";
 import {
   BETTER_AUTH_SECRET,
   BETTER_AUTH_URL,
-  WEB_URL,
-  MOBILE_URL,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
+  MOBILE_URL,
+  WEB_URL,
 } from "@repo/config";
+import { db } from "@repo/db";
+import * as schema from "@repo/db/schema";
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { openAPI } from "better-auth/plugins";
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
   database: drizzleAdapter(db, {

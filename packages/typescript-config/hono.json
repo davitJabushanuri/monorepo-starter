@@ -5,6 +5,6 @@
     "types": ["bun-types"],
     "noEmit": false,
     "outDir": "./dist",
-    "incremental": false,
+    "incremental": false
   }
 }
