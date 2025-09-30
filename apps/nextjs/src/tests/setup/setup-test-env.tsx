@@ -1,10 +1,29 @@
-import { afterEach, expect } from "bun:test";
+import { afterEach, expect, mock } from "bun:test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup, type RenderOptions, render } from "@testing-library/react";
 import { ErrorBoundaryProvider } from "@/providers/error-boundary-provider";
 
 expect.extend(matchers);
+
+// Set up environment variables for tests
+process.env.NEXT_PUBLIC_API_URL = "http://localhost:3000/api";
+process.env.NEXT_PUBLIC_BASE_URL = "http://localhost:3000";
+
+mock.module("better-auth/react", () => ({
+  createAuthClient: () => ({
+    signIn: {
+      email: mock(),
+      social: mock(),
+    },
+    signUp: {
+      email: mock(),
+    },
+    signOut: mock(),
+    useSession: mock(),
+    getSession: mock(),
+  }),
+}));
 
 afterEach(() => {
   cleanup();
