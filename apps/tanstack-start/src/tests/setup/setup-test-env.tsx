@@ -2,7 +2,6 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render } from "vitest-browser-react";
-import { ErrorBoundaryProvider } from "@/providers/error-boundary-provider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,9 +13,7 @@ const queryClient = new QueryClient({
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ErrorBoundaryProvider>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </ErrorBoundaryProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

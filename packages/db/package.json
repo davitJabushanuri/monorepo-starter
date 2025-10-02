@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/config": "*",
+    "@repo/config": "workspace:*",
     "dotenv": "^17.2.2",
     "drizzle-orm": "^0.44.5",
     "pg": "^8.16.3"
