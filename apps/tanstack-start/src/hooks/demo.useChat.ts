@@ -38,7 +38,6 @@ function useStreamConnection(
 }
 
 export function useChat() {
-  // @ts-expect-error
   useStreamConnection("/demo/db-chat-api", messagesCollection);
 
   const sendMessage = (message: string, user: string) => {
