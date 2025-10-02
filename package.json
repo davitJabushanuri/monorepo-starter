@@ -5,10 +5,11 @@
     "start": "turbo run start",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "bunx biome check",
-    "lint:fix": "bunx biome check --write",
+    "lint": "pnpm dlx biome check",
+    "lint:fix": "pnpm dlx biome check --write",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
+    "test:headless": "turbo run test:headless",
     "test:watch": "turbo run test:watch",
     "test:coverage": "turbo run test:coverage",
     "test:e2e": "turbo run test:e2e",
@@ -40,12 +41,9 @@
     "semantic-release": "^24.2.9"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22",
+    "pnpm": ">=10"
   },
-  "packageManager": "bun@1.2.19",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@10.18.0",
   "version": "1.2.0"
 }
