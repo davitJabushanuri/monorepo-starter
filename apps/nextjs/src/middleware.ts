@@ -1,12 +1,12 @@
+import { getSessionCookie } from "better-auth/cookies";
 import { type NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/features/auth/lib/auth-client";
 
 export async function middleware(request: NextRequest) {
   // Get the pathname of the request (e.g. /, /auth/signin, /dashboard)
   const path = request.nextUrl.pathname;
 
   // Define public paths that don't require authentication
-  const publicPaths = ["/auth/signin", "/auth/signup"];
+  const publicPaths = ["/auth/signin", "/auth/signup", "/"];
   const isPublicPath = publicPaths.includes(path);
 
   if (isPublicPath) {
@@ -14,21 +14,12 @@ export async function middleware(request: NextRequest) {
   }
 
   // For protected routes, check if user is authenticated
-  try {
-    const { data } = await getSession({
-      fetchOptions: {
-        headers: {
-          cookie: request.headers.get("cookie") || "",
-        },
-      },
-    });
+  // Note: getSessionCookie only checks for cookie existence, not validity
+  // Always validate session on the server for protected actions
+  const sessionCookie = getSessionCookie(request);
 
-    if (!data?.session) {
-      // Redirect to sign in page
-      return NextResponse.redirect(new URL("/auth/signin", request.url));
-    }
-  } catch {
-    // If session check fails, redirect to sign in
+  if (!sessionCookie) {
+    // If no session cookie, redirect to sign in
     return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
