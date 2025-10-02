@@ -9,11 +9,28 @@
 
 import { page } from "@vitest/browser/context";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render } from "vitest-browser-react";
+import { render } from "@/tests/setup/setup-test-env";
 
 // Hoisted mock functions for auth client
 const mockSignInEmail = vi.hoisted(() => vi.fn());
 const mockSignInSocial = vi.hoisted(() => vi.fn());
+
+// Mock TanStack Router Link to avoid router context issues
+vi.mock("@tanstack/react-router", () => ({
+  Link: ({
+    to,
+    children,
+    className,
+  }: {
+    to: string;
+    children: React.ReactNode;
+    className?: string;
+  }) => (
+    <a href={to} className={className}>
+      {children}
+    </a>
+  ),
+}));
 
 // Only mock the auth client - let everything else render naturally
 vi.mock("@/features/auth/lib/auth-client", () => ({
@@ -203,7 +220,6 @@ describe("SignInForm", () => {
     await submitButton.click();
 
     // Check for loading state - button text changes to "Signing In..."
-    // Use getByRole with the new button text
     await expect
       .element(page.getByRole("button", { name: /signing in/i }))
       .toBeInTheDocument();
